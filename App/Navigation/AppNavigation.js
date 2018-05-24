@@ -1,10 +1,12 @@
 import { StackNavigator } from 'react-navigation'
+import WatchConnectScreen from '../Containers/WatchConnectScreen'
 import LaunchScreen from '../Containers/LaunchScreen'
 
 import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
-const PrimaryNav = StackNavigator({
+export const PrimaryNav = StackNavigator({
+  WatchConnectScreen: { screen: WatchConnectScreen },
   LaunchScreen: { screen: LaunchScreen }
 }, {
   // Default config for all screens
