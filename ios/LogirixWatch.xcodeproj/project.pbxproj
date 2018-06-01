@@ -28,6 +28,7 @@
 		3D3BECF2B47C4FCAAD1C4553 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB44DD49AF79472FBD8F1AAB /* SimpleLineIcons.ttf */; };
 		3FEF8CB32A5C4FBFAAB41FB9 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5FAF7C245694F39932FA2B4 /* libRNImagePicker.a */; };
 		4C3F65F255B34177B17DA103 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 35452AFF72A741C0AC5C3F69 /* EvilIcons.ttf */; };
+		5DCEAA94854946008E8A77B8 /* libRCTAppleHealthKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6837549B4384928BCC92AD9 /* libRCTAppleHealthKit.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		781306AB20B6FC6800665A0A /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 781306A920B6FC6800665A0A /* Interface.storyboard */; };
 		781306AD20B6FC6800665A0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 781306AC20B6FC6800665A0A /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		781306BB20B6FC6800665A0A /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781306BA20B6FC6800665A0A /* ExtensionDelegate.swift */; };
 		781306BD20B6FC6800665A0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 781306BC20B6FC6800665A0A /* Assets.xcassets */; };
 		781306C120B6FC6800665A0A /* watchapp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 781306A720B6FC6800665A0A /* watchapp.app */; };
+		78EE3F5020BD75E60051206A /* RoutesInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EE3F4F20BD75E60051206A /* RoutesInterfaceController.swift */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8783CD4A695548E8A2A91EB6 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 951BCB42ED4943F3A68361FD /* Foundation.ttf */; };
 		9ED4B442B4DF48DF83463DAD /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84CC5B1B3AA5406C8427DA27 /* FontAwesome.ttf */; };
@@ -343,6 +345,13 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RCTLinking;
 		};
+		78EE3F4D20BD74C60051206A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3D367AA211D84F31921DB2C7 /* RCTAppleHealthKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3774C88D1D2092F20000B3F3;
+			remoteInfo = RCTAppleHealthKit;
+		};
 		832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */;
@@ -410,6 +419,7 @@
 		2F173E5B6B4D47728BC9647E /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
 		35452AFF72A741C0AC5C3F69 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		387DB5962BD446848D5E0622 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeConfig.a; sourceTree = "<group>"; };
+		3D367AA211D84F31921DB2C7 /* RCTAppleHealthKit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTAppleHealthKit.xcodeproj; path = "../node_modules/rn-apple-healthkit/RCTAppleHealthKit.xcodeproj"; sourceTree = "<group>"; };
 		42787605638D45CCB2ABC499 /* RNWatch.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNWatch.xcodeproj; path = "../node_modules/react-native-watch-connectivity/RNWatch.xcodeproj"; sourceTree = "<group>"; };
 		56C13D2A43A64F41A4046BB4 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -424,6 +434,7 @@
 		781306BC20B6FC6800665A0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		781306BE20B6FC6800665A0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		78EE3F4F20BD75E60051206A /* RoutesInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesInterfaceController.swift; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		84CC5B1B3AA5406C8427DA27 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		8562B100CC5348D0AB3D0B88 /* libRNWatch.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNWatch.a; sourceTree = "<group>"; };
@@ -434,6 +445,7 @@
 		B0B9B23D581D4DECB23A4235 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		B10C44891F8F48C68278E91C /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		C5FAF7C245694F39932FA2B4 /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
+		C6837549B4384928BCC92AD9 /* libRCTAppleHealthKit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTAppleHealthKit.a; sourceTree = "<group>"; };
 		D945329A2B194884BD184D87 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		EC492B99AC524546ADB1705A /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -468,6 +480,7 @@
 				237F15CE81CF4348A26794B2 /* libReactNativeConfig.a in Frameworks */,
 				C46225B3D2ED48CD80DF7DEF /* libRNWatch.a in Frameworks */,
 				3FEF8CB32A5C4FBFAAB41FB9 /* libRNImagePicker.a in Frameworks */,
+				5DCEAA94854946008E8A77B8 /* libRCTAppleHealthKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,6 +634,7 @@
 				387DB5962BD446848D5E0622 /* libReactNativeConfig.a */,
 				8562B100CC5348D0AB3D0B88 /* libRNWatch.a */,
 				C5FAF7C245694F39932FA2B4 /* libRNImagePicker.a */,
+				C6837549B4384928BCC92AD9 /* libRCTAppleHealthKit.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -666,6 +680,7 @@
 				781306BA20B6FC6800665A0A /* ExtensionDelegate.swift */,
 				781306BC20B6FC6800665A0A /* Assets.xcassets */,
 				781306BE20B6FC6800665A0A /* Info.plist */,
+				78EE3F4F20BD75E60051206A /* RoutesInterfaceController.swift */,
 			);
 			path = "watchapp Extension";
 			sourceTree = "<group>";
@@ -683,6 +698,14 @@
 			children = (
 				78C398B91ACF4ADC00677621 /* libRCTLinking.a */,
 				3DAD3E881DF850E9000B6D8A /* libRCTLinking-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		78EE3F4A20BD74C60051206A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				78EE3F4E20BD74C60051206A /* libRCTAppleHealthKit.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -706,6 +729,7 @@
 				2F173E5B6B4D47728BC9647E /* ReactNativeConfig.xcodeproj */,
 				42787605638D45CCB2ABC499 /* RNWatch.xcodeproj */,
 				B0B9B23D581D4DECB23A4235 /* RNImagePicker.xcodeproj */,
+				3D367AA211D84F31921DB2C7 /* RCTAppleHealthKit.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -898,6 +922,10 @@
 				{
 					ProductGroup = 5E91572E1DD0AC6500FF2AA8 /* Products */;
 					ProjectRef = 5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */;
+				},
+				{
+					ProductGroup = 78EE3F4A20BD74C60051206A /* Products */;
+					ProjectRef = 3D367AA211D84F31921DB2C7 /* RCTAppleHealthKit.xcodeproj */;
 				},
 				{
 					ProductGroup = ADBDB9201DFEBF0600ED6528 /* Products */;
@@ -1240,6 +1268,13 @@
 			remoteRef = 78C398B81ACF4ADC00677621 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		78EE3F4E20BD74C60051206A /* libRCTAppleHealthKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTAppleHealthKit.a;
+			remoteRef = 78EE3F4D20BD74C60051206A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		832341B51AAA6A8300B99B32 /* libRCTText.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1341,6 +1376,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78EE3F5020BD75E60051206A /* RoutesInterfaceController.swift in Sources */,
 				781306BB20B6FC6800665A0A /* ExtensionDelegate.swift in Sources */,
 				781306B920B6FC6800665A0A /* InterfaceController.swift in Sources */,
 			);
@@ -1402,12 +1438,14 @@
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../node_modules/react-native-watch-connectivity",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
+					"$(SRCROOT)/../node_modules/rn-apple-healthkit/RCTAppleHealthKit",
 				);
 				INFOPLIST_FILE = LogirixWatchTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1434,12 +1472,14 @@
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../node_modules/react-native-watch-connectivity",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
+					"$(SRCROOT)/../node_modules/rn-apple-healthkit/RCTAppleHealthKit",
 				);
 				INFOPLIST_FILE = LogirixWatchTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1467,6 +1507,7 @@
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../node_modules/react-native-watch-connectivity",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
+					"$(SRCROOT)/../node_modules/rn-apple-healthkit/RCTAppleHealthKit",
 				);
 				INFOPLIST_FILE = LogirixWatch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1493,6 +1534,7 @@
 					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 					"$(SRCROOT)/../node_modules/react-native-watch-connectivity",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
+					"$(SRCROOT)/../node_modules/rn-apple-healthkit/RCTAppleHealthKit",
 				);
 				INFOPLIST_FILE = LogirixWatch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1609,6 +1651,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.floculture.LogirixWatch.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1650,6 +1693,7 @@
 				INFOPLIST_FILE = watchapp/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.floculture.LogirixWatch.watchkitapp;

@@ -10,8 +10,9 @@ import WatchKit
 import WatchConnectivity
 import Foundation
 import CoreLocation
+import HealthKit
 
-class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationManagerDelegate {
+class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationManagerDelegate, HKWorkoutSessionDelegate {
 
     @IBOutlet var image: WKInterfaceImage!
     @IBOutlet var label: WKInterfaceLabel!
@@ -20,6 +21,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     var currentLocation: CLLocationCoordinate2D!
     var manager: CLLocationManager!
     var session: WCSession!
+    var workoutSession: HKWorkoutSession!
+    var healthStore: HKHealthStore!
+    var route: String!
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -47,6 +51,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+      if healthStore != nil{
+        healthStore.end(self.workoutSession)
+      }
     }
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -55,12 +62,22 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
   
   func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
     print("watch received message", message);
+    
     let text = message["text"] as! String
+    
+    if text.contains("latitude")
+    {
+      self.route = text
+    }else{
+      self.label.setText(text)
+    }
+    
     let timestamp : Double = (message["timestamp"] as! NSNumber).doubleValue
-    self.label.setText(text)
     let currentTimestamp: Double = Date().timeIntervalSince1970 * 1000
     let elapsed : Double = currentTimestamp - timestamp
     replyHandler(["elapsed":Int(elapsed), "timestamp": round(currentTimestamp)])
+    
+    
   }
   
   ////////////////////////////////////////////////////////////////////////////////
@@ -127,11 +144,12 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
   
   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
     DispatchQueue.main.async {
+      
       guard self.isRequestingLocation else { return }
       
       switch status {
       case .authorizedWhenInUse:
-        manager.requestLocation()
+        manager.startUpdatingLocation()
         
       case .denied:
         print("Auth Denied")
@@ -181,6 +199,41 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
   func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
     // Unused
   }
+    
+  ////////////////////////////////////////////////////////////////////////////////
+  // Starting workout to be able to get heart rate in near real-time and on background
+    
+    @IBAction func startWorkoutSession() {
+        // Create a new workout session
+       let configuration = HKWorkoutConfiguration()
+        configuration.activityType = .running
+        configuration.locationType = .indoor
+      
+        do {
+          self.workoutSession = try HKWorkoutSession(configuration: configuration)
+          healthStore = HKHealthStore.init()
+          workoutSession.delegate = self
+          healthStore.start(workoutSession)
+          NSLog("Workout started")
+        }
+        catch let error as NSError {
+          // Perform proper error handling here...
+          NSLog("*** Unable to create the workout session: \(error.localizedDescription) ***")
+        }
+    }
+  
+  func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) {
+    //nothing to do
+  }
+  
+  func workoutSession(_ workoutSession: HKWorkoutSession, didGenerate event: HKWorkoutEvent) {
+    //nothing to do
+  }
+  
+  func workoutSession(_ workoutSession: HKWorkoutSession, didChangeTo toState: HKWorkoutSessionState, from fromState: HKWorkoutSessionState, date: Date) {
+    //nothing to do
+  }
+    
   
   ////////////////////////////////////////////////////////////////////////////////
   
@@ -202,4 +255,44 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     }
     return ""
   }
+  
+  ////////////////////////////////////////////////////////////////////////////////
+  // Navigation logic
+  
+  override func contextForSegue(withIdentifier segueIdentifier: String) -> Any? {
+    var routeDic = Dictionary<String,CLLocation>.init()
+    
+    if self.route == nil {
+      routeDic.updateValue(CLLocation.init(latitude: 39.815089 , longitude: -7.507531), forKey: "start")
+      routeDic.updateValue(CLLocation.init(latitude: 39.813690 , longitude: -7.505750), forKey: "end")
+    }else{
+      print(self.route)
+      
+      if let data = self.route.data(using: String.Encoding.utf8) {
+        do {
+
+          let jsonObj = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
+          
+          let dicti = jsonObj as? [String:AnyObject]
+          
+          let startPoint = dicti!["start"] as! [String:Double]
+          let endPoint = dicti!["end"] as! [String:Double]
+          
+          routeDic.updateValue(CLLocation.init(latitude: startPoint["latitude"]! , longitude: startPoint["longitude"]!), forKey: "start")
+          routeDic.updateValue(CLLocation.init(latitude: endPoint["latitude"]! , longitude: endPoint["longitude"]!), forKey: "end")
+          
+          return routeDic
+          
+        } catch {
+          // Handle error
+          print(error)
+          return routeDic
+        }
+      }
+    }
+    
+    
+    return routeDic
+  }
+  
 }

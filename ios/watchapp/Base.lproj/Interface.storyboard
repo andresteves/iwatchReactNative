@@ -14,8 +14,18 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="watchapp" customModuleProvider="target">
                     <items>
-                        <imageView height="105" alignment="left" id="0pG-Xk-YqF"/>
+                        <imageView height="58" alignment="left" id="0pG-Xk-YqF"/>
                         <label width="1" alignment="left" text="Label" textAlignment="center" id="fod-vj-R5h"/>
+                        <button width="1" height="28" alignment="left" title="Workout" id="hJB-fC-ZBi">
+                            <connections>
+                                <action selector="startWorkoutSession" destination="AgC-eL-Hgc" id="DxL-Or-otq"/>
+                            </connections>
+                        </button>
+                        <button width="1" height="29" alignment="left" title="Routes" id="PEY-W1-eDR">
+                            <connections>
+                                <segue destination="vfr-kr-ntk" kind="push" identifier="RouteMap" id="G5j-Fi-C2I"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
                         <outlet property="image" destination="0pG-Xk-YqF" id="1an-Si-aPr"/>
@@ -23,6 +33,21 @@
                     </connections>
                 </controller>
             </objects>
+            <point key="canvasLocation" x="-1" y="98"/>
+        </scene>
+        <!--Routes Interface Controller-->
+        <scene sceneID="WfR-ir-cBJ">
+            <objects>
+                <controller id="vfr-kr-ntk" customClass="RoutesInterfaceController" customModule="watchapp_Extension">
+                    <items>
+                        <map width="1" height="151" alignment="left" id="0aD-vf-g7M"/>
+                    </items>
+                    <connections>
+                        <outlet property="interfaceMap" destination="0aD-vf-g7M" id="dLo-dQ-g8f"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="289" y="98"/>
         </scene>
     </scenes>
 </document>

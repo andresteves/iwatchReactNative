@@ -37,6 +37,10 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Take a picture and share with iWatch</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Read and understand health data.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Share the workout data with other apps.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Get iWatch location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

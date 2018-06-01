@@ -43,4 +43,18 @@ export default StyleSheet.create({
   disabled:     {
     opacity: 0.4
   },
+  buttons:          {
+    borderRadius: 6,
+    backgroundColor:        COLORS.facebook,
+    height:                 44,
+    padding:                5,
+    width:                  150,
+    marginRight:            1,
+  },
+  buttonText:       {
+    color:         COLORS.silver,
+    fontSize:      20,
+    letterSpacing: 0.5,
+    fontWeight:    'bold'
+  },
 })

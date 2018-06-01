@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, LayoutAnimation, TextInput, View } from 'react-native'
+import { ScrollView, Text, LayoutAnimation, TextInput, View, Button } from 'react-native'
 import * as watch from 'react-native-watch-connectivity'
 import COLORS from '../Themes/Colors'
 import WatchImage from '../Components/WatchImage'
@@ -7,6 +7,8 @@ import ReachabilityText from '../Components/ReachabilityText'
 import DualButton from '../Components/DualButton'
 import {pickImage} from '../Transforms/PickImageDevice'
 import {listenToKeyboard} from '../Transforms/KeyBoard'
+import { connect } from 'react-redux'
+import WatchActions from '../Redux/WatchRedux'
 
 const LAYOUT_ANIM_PRESET = LayoutAnimation.Presets.easeInEaseOut;
 
@@ -23,7 +25,10 @@ class WatchConnectScreen extends Component {
       reachable:  false,
       loading:    false,
       text:       '',
-      locationText:   '',
+      // heartbeat: 0,
+      // timeTakenToReachWatch: '',
+      // timeTakenToReply:      '',
+      // locationText:   '',
       watchState: watch.WatchState.Inactive,
       fileAPI:    true,
     }
@@ -36,28 +41,18 @@ class WatchConnectScreen extends Component {
     })
   }
 
-  receiveApplicationContext = (err, applicationContext) => {
-    if (!err) {
-      console.log('received application context', applicationContext)
-      this.setState({applicationContext})
-    }
-    else {
-      console.error('error receiving application context', err)
-    }
-  }
-
   subscribeToWatchEvents () {
     this.subscriptions = [
-      watch.subscribeToMessages(this.receiveMessage),
       watch.subscribeToWatchState(this.receiveWatchState),
       watch.subscribeToWatchReachability(this.receiveWatchReachability),
-      watch.subscribeToApplicationContext(this.receiveApplicationContext),
     ]
   }
 
   componentDidMount() {
     this.listenToKeyboard()
     this.subscribeToWatchEvents()
+    this.props.getLocation()
+    this.props.getHeartBeat()
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -65,83 +60,12 @@ class WatchConnectScreen extends Component {
       },null,null
     );
 
-    watch.updateApplicationContext({context: 'context'})
-  }
-
-  _pickImage = () => {
-    return pickImage('Send Image To Watch', !this.state.fileAPI)
-  }
-
-  pickImage = () => {
-    const fileAPI = this.state.fileAPI
-    this._pickImage().then(image => {
-      this.configureNextAnimation
-      if (!image.didCancel) {
-        this.setLoading();
-        const startTransferTime = new Date().getTime()
-        let promise
-
-        if (fileAPI && image.uri) promise = watch.transferFile(image.uri)
-        else if (image.data) promise = watch.sendMessageData(image.data)
-        else promise = Promise.reject()
-
-        promise.then(resp => {
-          const endTransferTime = new Date().getTime()
-          const elapsed         = endTransferTime - startTransferTime
-          console.log(`successfully transferred in ${elapsed}ms`, resp)
-          this.configureNextAnimation()
-          this.setState({
-            fileTransferTime:      elapsed,
-            useDataAPI:            !fileAPI,
-            timeTakenToReachWatch: null,
-            timeTakenToReply:      null
-          })
-        }).catch(err => {
-          console.warn('Error sending message data', err, err.stack)
-          this.configureNextAnimation
-        }).finally(() => {
-          this.setState({loading: false})
-        })
-      }
-    }).catch(err => {
-      console.error(`Error picking image`, err)
-    })
-  }
-
-  setLoading () {
-    this.setState({
-      loading:               true,
-      timeTakenToReachWatch: null,
-      timeTakenToReply:      null,
-      fileTransferTime:      null
-    })
-  }
-
-  sendMessage = () => {
-    const text = this.state.text
-    if (text.trim().length) {
-      const timestamp = new Date().getTime()
-      this.configureNextAnimation
-      this.setLoading()
-
-      watch.sendMessage({text, timestamp}, (err, resp) => {
-        if (!err) {
-          console.log('response received', resp)
-          const timeTakenToReachWatch = resp.elapsed
-          const timeTakenToReply      = new Date().getTime() - parseInt(resp.timestamp)
-          this.configureNextAnimation
-          this.setState({timeTakenToReachWatch, timeTakenToReply, loading: false})
-        }
-        else {
-          console.error('error sending message to watch', err)
-        }
-      })
-    }
+    //Being unable to send a route we can only send start and end points
+    this.props.sendMessage('{"start":{"latitude": 39.815089, "longitude": -7.507531}, "end":{"latitude": 39.813690, "longitude": -7.505750}}')
   }
 
   receiveWatchReachability = (err, reachable) => {
     if (!err) {
-      console.log('received watch reachability', reachable)
       this.configureNextAnimation
       this.setState({reachable})
     }
@@ -163,28 +87,6 @@ class WatchConnectScreen extends Component {
     this.unsubscribeFromKeyboardEvents()
   }
 
-  receiveMessage = (err, message, replyHandler) => {
-    if (err) console.error(`Error receiving message`, err)
-    else {
-      console.log('app received message', message)
-      
-      if (message.message === 'ping') {
-        this.setState({pings: this.state.pings + 1})
-        if (replyHandler) {
-          replyHandler({message: 'pong'})
-        }
-        else {
-          console.error('no reply handler...')
-        }
-      }else{
-        this.setState({locationText:message.latitude+","+message.longitude})
-      }
-
-      this.configureNextAnimation
-      this.setState({messages: [...this.state.messages, message]})
-    }
-  }
-
   receiveWatchState = (err, watchState) => {
     if (err) console.error(`Error receiving watch state`, err)
     else {
@@ -197,13 +99,11 @@ class WatchConnectScreen extends Component {
   renderButtons () {
     const {reachable, fileAPI, text}  = this.state
     return (
-      <View>
-        <DualButton
-          textButtonDisabled={!text.trim().length || !reachable}
-          imageButtonDisabled={!reachable}
-          onTextButtonPress={this.sendMessage}
-          onImageButtonPress={this.pickImage}
-          disabled={!reachable}
+      <View style={styles.buttons}>
+        <Button
+          onPress={()=>this.props.sendMessage(this.state.text)}
+          title="Send message"
+          color="#fff"
         />
       </View>
     )
@@ -219,8 +119,8 @@ class WatchConnectScreen extends Component {
             reachable={this.state.reachable}
             fileTransferTime={this.state.fileTransferTime}
             useDataAPI={this.state.useDataAPI}
-            timeTakenToReachWatch={this.state.timeTakenToReachWatch}
-            timeTakenToReply={this.state.timeTakenToReply}
+            timeTakenToReachWatch={this.props.timeTakenToReachWatch}
+            timeTakenToReply={this.props.timeTakenToReply}
           />
         </View>
         <TextInput
@@ -237,7 +137,7 @@ class WatchConnectScreen extends Component {
 
         <TextInput
           style={styles.locationText}
-          value={this.state.locationText}
+          value={this.props.locationText}
           placeholder="iWatch Location"
         />
        
@@ -246,4 +146,21 @@ class WatchConnectScreen extends Component {
   }
 }
 
-export default WatchConnectScreen
+const mapStateToProps = (state) => {
+  return {
+    timeTakenToReachWatch: state.watch.timeTakenToReachWatch,
+    timeTakenToReply: state.watch.timeTakenToReply,
+    locationText: state.watch.locationText,
+    heartbeat: state.watch.heartbeat
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    sendMessage:(watchText) => { dispatch(WatchActions.sendText(watchText)) },
+    getLocation: () => { dispatch(WatchActions.getLocationText()) },
+    getHeartBeat: () => { dispatch(WatchActions.getHeartBeat()) }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WatchConnectScreen)
